@@ -1,0 +1,686 @@
+<!doctype html>
+<html><head><meta charset='utf-8'><title>Preview</title><style>body{font-family:system-ui;padding:16px}
+iframe, img{max-width:100%}</style></head><body><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Void Networks</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void: #05010d;
+    --deep: #0a0218;
+    --purple-dark: #150328;
+    --purple-mid: #3b0764;
+    --purple-bright: #7c3aed;
+    --purple-glow: #a855f7;
+    --pink-accent: #d946ef;
+    --white: #f5eeff;
+    --muted: #9b7ec8;
+    --glass: rgba(139,92,246,0.07);
+    --glass-border: rgba(168,85,247,0.2);
+    --glow-sm: 0 0 8px rgba(168,85,247,0.5);
+    --glow-md: 0 0 20px rgba(168,85,247,0.4), 0 0 40px rgba(168,85,247,0.15);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    font-family: 'Rajdhani', sans-serif;
+    background: var(--void);
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── STARFIELD ── */
+  #starfield {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .star-layer {
+    position: absolute;
+    width: 100%;
+    height: 200%;
+    top: -100%;
+  }
+
+  .s1 {
+    background-image:
+      radial-gradient(1px 1px at 5% 10%, #fff 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 12% 35%, #e8d5ff 0%, transparent 100%),
+      radial-gradient(1px 1px at 20% 18%, #fff 0%, transparent 100%),
+      radial-gradient(2px 2px at 28% 60%, #c4a0ff 0%, transparent 100%),
+      radial-gradient(1px 1px at 35% 42%, #fff 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 44% 8%, #e0ccff 0%, transparent 100%),
+      radial-gradient(1px 1px at 52% 78%, #fff 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 25%, #f0e0ff 0%, transparent 100%),
+      radial-gradient(2px 2px at 68% 55%, #fff 0%, transparent 100%),
+      radial-gradient(1px 1px at 75% 15%, #ddc4ff 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 82% 70%, #fff 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 38%, #e8d5ff 0%, transparent 100%),
+      radial-gradient(1px 1px at 95% 85%, #fff 0%, transparent 100%),
+      radial-gradient(1px 1px at 8% 88%, #c4a0ff 0%, transparent 100%),
+      radial-gradient(2px 2px at 40% 95%, #fff 0%, transparent 100%),
+      radial-gradient(1px 1px at 65% 92%, #e8d5ff 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 78% 48%, #fff 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 50%, #ddc4ff 0%, transparent 100%),
+      radial-gradient(1px 1px at 30% 75%, #fff 0%, transparent 100%),
+      radial-gradient(2px 2px at 88% 22%, #c4a0ff 0%, transparent 100%);
+    animation: fall 40s linear infinite;
+    opacity: 0.9;
+  }
+  .s2 {
+    background-image:
+      radial-gradient(1px 1px at 7% 20%, #fff 0%, transparent 100%),
+      radial-gradient(1px 1px at 22% 48%, #e0ccff 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 38% 30%, #fff 0%, transparent 100%),
+      radial-gradient(1px 1px at 50% 72%, #c4a0ff 0%, transparent 100%),
+      radial-gradient(1px 1px at 63% 12%, #fff 0%, transparent 100%),
+      radial-gradient(2px 2px at 77% 60%, #e8d5ff 0%, transparent 100%),
+      radial-gradient(1px 1px at 85% 40%, #fff 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 93% 78%, #ddc4ff 0%, transparent 100%),
+      radial-gradient(1px 1px at 15% 65%, #fff 0%, transparent 100%),
+      radial-gradient(1px 1px at 47% 88%, #c4a0ff 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 33%, #fff 0%, transparent 100%),
+      radial-gradient(2px 2px at 3%  50%, #e0ccff 0%, transparent 100%);
+    animation: fall 65s linear infinite;
+    opacity: 0.45;
+  }
+  .s3 {
+    background-image:
+      radial-gradient(1px 1px at 18% 15%, #fff 0%, transparent 100%),
+      radial-gradient(1px 1px at 33% 55%, #e8d5ff 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 57% 28%, #fff 0%, transparent 100%),
+      radial-gradient(1px 1px at 72% 68%, #c4a0ff 0%, transparent 100%),
+      radial-gradient(1px 1px at 84% 82%, #fff 0%, transparent 100%),
+      radial-gradient(2px 2px at 45% 40%, #ddc4ff 0%, transparent 100%),
+      radial-gradient(1px 1px at 10% 90%, #fff 0%, transparent 100%),
+      radial-gradient(1px 1px at 92% 10%, #e0ccff 0%, transparent 100%);
+    animation: fall 95s linear infinite;
+    opacity: 0.3;
+  }
+
+  @keyframes fall {
+    0%   { transform: translateY(0); }
+    100% { transform: translateY(50%); }
+  }
+
+  /* Nebula */
+  .nebula {
+    position: fixed; border-radius: 50%; pointer-events: none; z-index: 0; filter: blur(90px);
+  }
+  .n1 { width:500px; height:500px; background: radial-gradient(circle, rgba(88,28,220,0.2) 0%, transparent 70%); top:-80px; left:-80px; }
+  .n2 { width:600px; height:400px; background: radial-gradient(circle, rgba(168,85,247,0.13) 0%, transparent 70%); bottom:-80px; right:-80px; }
+  .n3 { width:300px; height:300px; background: radial-gradient(circle, rgba(217,70,239,0.1) 0%, transparent 70%); top:45%; left:50%; transform:translate(-50%,-50%); }
+
+  /* ── OVERLAY / POPUP ── */
+  #overlay {
+    position: fixed; inset: 0; z-index: 1000;
+    background: rgba(5,1,13,0.88);
+    backdrop-filter: blur(8px);
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  @keyframes popIn {
+    0%   { transform: scale(0.82) translateY(24px); opacity: 0; }
+    100% { transform: scale(1) translateY(0); opacity: 1; }
+  }
+  @keyframes fadeOut {
+    to { opacity: 0; }
+  }
+
+  #modal {
+    background: linear-gradient(150deg, rgba(21,3,40,0.98) 0%, rgba(8,2,20,0.98) 100%);
+    border: 1px solid rgba(168,85,247,0.3);
+    border-radius: 22px;
+    padding: 52px 52px 44px;
+    max-width: 500px; width: 92%;
+    text-align: center;
+    box-shadow: 0 0 80px rgba(139,92,246,0.2), 0 0 160px rgba(139,92,246,0.08), inset 0 1px 0 rgba(255,255,255,0.05);
+    animation: popIn 0.55s cubic-bezier(0.34,1.5,0.64,1) forwards;
+  }
+
+  .orb {
+    width: 68px; height: 68px; border-radius: 50%;
+    border: 2px solid rgba(168,85,247,0.55);
+    margin: 0 auto 24px;
+    position: relative; display: flex; align-items: center; justify-content: center;
+    animation: pulse 3s ease-in-out infinite;
+  }
+  .orb::before {
+    content: ''; position: absolute; inset: 7px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(168,85,247,0.35) 0%, transparent 70%);
+  }
+  .orb::after {
+    content: ''; position: absolute; inset: -10px; border-radius: 50%;
+    border: 1px solid rgba(168,85,247,0.12);
+    animation: pulse 3s ease-in-out infinite 0.6s;
+  }
+  @keyframes pulse {
+    0%,100% { box-shadow: 0 0 12px rgba(168,85,247,0.35), 0 0 28px rgba(168,85,247,0.12); }
+    50%      { box-shadow: 0 0 24px rgba(168,85,247,0.65), 0 0 55px rgba(168,85,247,0.25); }
+  }
+
+  #modal h1 {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.7rem; font-weight: 900;
+    background: linear-gradient(135deg, #fff 0%, #c084fc 50%, #a855f7 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    margin-bottom: 12px; letter-spacing: 0.02em; line-height: 1.25;
+  }
+
+  #modal p {
+    color: var(--muted); font-size: 1rem; line-height: 1.7;
+    font-weight: 500; letter-spacing: 0.03em; margin-bottom: 6px;
+  }
+
+  .tags {
+    display: flex; justify-content: center; gap: 9px; flex-wrap: wrap;
+    margin: 20px 0 32px;
+  }
+  .tag {
+    background: rgba(139,92,246,0.11); border: 1px solid rgba(139,92,246,0.28);
+    color: #c084fc; font-size: 0.76rem; font-family: 'Orbitron', monospace;
+    font-weight: 600; padding: 5px 14px; border-radius: 20px;
+    letter-spacing: 0.06em; text-transform: uppercase;
+  }
+
+  #enter-btn {
+    width: 100%; padding: 16px; border: none; border-radius: 13px;
+    background: linear-gradient(135deg, #6d28d9 0%, #7c3aed 40%, #9333ea 100%);
+    color: #fff; font-family: 'Orbitron', monospace; font-size: 0.92rem;
+    font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    cursor: pointer; position: relative; overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 22px rgba(124,58,237,0.55), 0 0 45px rgba(124,58,237,0.18);
+  }
+  #enter-btn::before {
+    content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.13), transparent);
+    transition: left 0.5s ease;
+  }
+  #enter-btn:hover::before { left: 100%; }
+  #enter-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(124,58,237,0.72), 0 0 65px rgba(124,58,237,0.28); }
+  #enter-btn:active { transform: translateY(0); }
+
+  /* ── APP ── */
+  #app {
+    position: relative; z-index: 10; min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 44px 20px 80px;
+  }
+
+  header { display: flex; align-items: center; gap: 16px; margin-bottom: 10px; }
+
+  /* Modified to match the requested sleek white logo */
+  .logo-orb {
+    width: 38px; height: 38px; border-radius: 50%;
+    border: 2.5px solid #ffffff;
+    position: relative; display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* Modified to match the requested clean, bold white font */
+  h1.title {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 2.5rem; font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.02em;
+  }
+
+  .tagline {
+    color: var(--muted); font-size: 0.9rem; letter-spacing: 0.18em;
+    text-transform: uppercase; margin-bottom: 38px; font-weight: 500;
+  }
+
+  /* ── SEARCH ── */
+  .search-wrap {
+    width: 100%; max-width: 680px; position: relative; margin-bottom: 16px;
+  }
+  #proxy-input {
+    width: 100%; padding: 17px 145px 17px 22px;
+    background: rgba(12,4,26,0.75); border: 1px solid rgba(168,85,247,0.22);
+    border-radius: 14px; color: var(--white);
+    font-family: 'Rajdhani', sans-serif; font-size: 1.03rem; font-weight: 500;
+    letter-spacing: 0.03em; outline: none; backdrop-filter: blur(12px);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.03);
+  }
+  #proxy-input::placeholder { color: rgba(155,126,200,0.45); }
+  #proxy-input:focus {
+    border-color: rgba(168,85,247,0.55);
+    box-shadow: 0 4px 18px rgba(0,0,0,0.35), 0 0 0 3px rgba(139,92,246,0.14), var(--glow-sm), inset 0 1px 0 rgba(255,255,255,0.03);
+  }
+  #launch-btn {
+    position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+    padding: 10px 26px; border: none; border-radius: 10px;
+    background: linear-gradient(135deg, #c084fc 0%, #a855f7 50%, #7c3aed 100%);
+    color: #fff; font-family: 'Orbitron', monospace; font-size: 0.82rem;
+    font-weight: 700; letter-spacing: 0.08em; cursor: pointer;
+    transition: all 0.25s ease; box-shadow: 0 2px 14px rgba(168,85,247,0.5);
+  }
+  #launch-btn:hover { transform: translateY(-50%) scale(1.05); box-shadow: 0 4px 24px rgba(168,85,247,0.7); }
+
+  /* ── QUICK LINKS ── */
+  .quick-links {
+    display: flex; gap: 9px; flex-wrap: wrap; justify-content: center; margin-bottom: 48px;
+  }
+  .q-btn {
+    padding: 8px 20px;
+    background: rgba(18,4,36,0.72); border: 1px solid rgba(168,85,247,0.18);
+    border-radius: 8px; color: var(--muted);
+    font-family: 'Rajdhani', sans-serif; font-size: 0.93rem; font-weight: 600;
+    letter-spacing: 0.05em; cursor: pointer; backdrop-filter: blur(10px);
+    transition: all 0.25s ease;
+  }
+  .q-btn:hover {
+    background: rgba(139,92,246,0.14); border-color: rgba(168,85,247,0.45);
+    color: #c084fc; box-shadow: var(--glow-sm); transform: translateY(-2px);
+  }
+
+  /* ── SECTION LABEL ── */
+  .section-lbl {
+    font-family: 'Orbitron', monospace; font-size: 0.68rem; font-weight: 600;
+    letter-spacing: 0.2em; text-transform: uppercase; color: rgba(168,85,247,0.55);
+    margin-bottom: 18px; display: flex; align-items: center; gap: 12px;
+  }
+  .section-lbl::before, .section-lbl::after {
+    content: ''; height: 1px; width: 55px;
+    background: linear-gradient(90deg, transparent, rgba(168,85,247,0.4));
+  }
+  .section-lbl::after { transform: scaleX(-1); }
+
+  /* ── DIVIDER ── */
+  .divider {
+    width: 100%; max-width: 780px; height: 1px; margin: 8px 0 38px;
+    background: linear-gradient(90deg, transparent, rgba(168,85,247,0.28), rgba(217,70,239,0.28), transparent);
+    position: relative;
+  }
+  .divider::after {
+    content: '⬡'; position: absolute; left: 50%; top: 50%;
+    transform: translate(-50%,-50%);
+    background: var(--void); padding: 0 10px;
+    color: rgba(168,85,247,0.45); font-size: 0.68rem;
+  }
+
+  /* ── PORTAL GRID ── */
+  .grid {
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    gap: 13px; width: 100%; max-width: 790px; margin-bottom: 50px;
+  }
+  @media (max-width: 660px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+    h1.title { font-size: 1.8rem; }
+  }
+
+  .portal {
+    position: relative;
+    background: linear-gradient(150deg, rgba(20,3,38,0.82) 0%, rgba(8,2,18,0.82) 100%);
+    border: 1px solid rgba(168,85,247,0.18); border-radius: 15px;
+    padding: 22px 8px 19px; cursor: pointer;
+    display: flex; flex-direction: column; align-items: center; gap: 9px;
+    transition: all 0.3s cubic-bezier(0.34,1.2,0.64,1);
+    backdrop-filter: blur(14px); overflow: hidden;
+    color: var(--white); font-family: 'Rajdhani', sans-serif;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.32), inset 0 1px 0 rgba(255,255,255,0.03);
+    border: none; /* override for styling */
+    border: 1px solid rgba(168,85,247,0.18);
+  }
+  .portal::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(139,92,246,0.09) 0%, transparent 60%);
+    opacity: 0; transition: opacity 0.3s ease;
+  }
+  .portal:hover::before { opacity: 1; }
+  .portal::after {
+    content: ''; position: absolute; top: 0; left: -100%;
+    width: 100%; height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(168,85,247,0.85), transparent);
+    transition: left 0.5s ease;
+  }
+  .portal:hover::after { left: 100%; }
+  .portal:hover {
+    border-color: rgba(168,85,247,0.48);
+    transform: translateY(-5px) scale(1.025);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.4), var(--glow-sm), inset 0 1px 0 rgba(255,255,255,0.07);
+  }
+  .portal:active { transform: translateY(-2px) scale(0.99); }
+
+  .portal .icon { font-size: 1.75rem; line-height: 1; filter: drop-shadow(0 0 7px rgba(168,85,247,0.4)); transition: transform 0.3s ease; }
+  .portal:hover .icon { transform: scale(1.18); }
+
+  .portal .lbl { font-size: 0.79rem; font-weight: 600; letter-spacing: 0.06em; color: var(--muted); text-transform: uppercase; text-align: center; line-height: 1.2; transition: color 0.3s; }
+  .portal:hover .lbl { color: #c084fc; }
+
+  .dot { position: absolute; top: 9px; right: 9px; width: 6px; height: 6px; border-radius: 50%; background: #a855f7; box-shadow: 0 0 6px #a855f7; animation: blink 2s ease-in-out infinite; }
+  @keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0.15; } }
+
+  /* ── SETTINGS ── */
+  #settings-wrap {
+    position: fixed; bottom: 22px; right: 22px; z-index: 500;
+  }
+  #s-fab {
+    width: 48px; height: 48px; border-radius: 13px;
+    background: linear-gradient(135deg, rgba(28,5,55,0.92), rgba(12,3,28,0.96));
+    border: 1px solid rgba(168,85,247,0.3); display: flex; align-items: center; justify-content: center;
+    cursor: pointer; backdrop-filter: blur(14px);
+    transition: all 0.3s ease; font-size: 1.2rem;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.4), var(--glow-sm);
+  }
+  #s-fab:hover { border-color: rgba(168,85,247,0.58); transform: rotate(45deg); box-shadow: 0 4px 20px rgba(0,0,0,0.4), var(--glow-md); }
+
+  #s-panel {
+    position: absolute; bottom: 58px; right: 0; width: 265px;
+    background: linear-gradient(150deg, rgba(20,3,40,0.97), rgba(8,2,20,0.97));
+    border: 1px solid rgba(168,85,247,0.22); border-radius: 17px;
+    padding: 20px; backdrop-filter: blur(20px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.5), var(--glow-sm);
+    display: none;
+  }
+  @keyframes slideUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+  #s-panel.open { display: block; animation: slideUp 0.25s cubic-bezier(0.34,1.2,0.64,1); }
+
+  .s-title {
+    font-family: 'Orbitron', monospace; font-size: 0.68rem; font-weight: 700;
+    letter-spacing: 0.15em; text-transform: uppercase; color: rgba(168,85,247,0.65);
+    margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid rgba(168,85,247,0.13);
+  }
+  .s-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
+  .s-info {}
+  .s-name { font-size: 0.88rem; font-weight: 600; color: var(--white); letter-spacing: 0.03em; display: block; }
+  .s-desc { font-size: 0.7rem; color: var(--muted); font-weight: 400; line-height: 1.4; margin-top: 2px; display: block; letter-spacing: 0.01em; }
+
+  /* Toggle */
+  .toggle { position: relative; width: 44px; height: 24px; flex-shrink: 0; }
+  .toggle input { opacity:0; width:0; height:0; }
+  .track {
+    position: absolute; inset: 0; background: rgba(55,18,95,0.65);
+    border: 1px solid rgba(168,85,247,0.18); border-radius: 12px;
+    cursor: pointer; transition: all 0.3s ease;
+  }
+  .track::after {
+    content: ''; position: absolute; top: 3px; left: 3px;
+    width: 16px; height: 16px; border-radius: 50%; background: var(--muted);
+    transition: all 0.3s cubic-bezier(0.34,1.4,0.64,1);
+  }
+  input:checked + .track { background: rgba(124,58,237,0.42); border-color: rgba(168,85,247,0.58); box-shadow: 0 0 10px rgba(168,85,247,0.28); }
+  input:checked + .track::after { left: calc(100% - 19px); background: #a855f7; box-shadow: 0 0 8px rgba(168,85,247,0.8); }
+
+  .status {
+    display: flex; align-items: center; gap: 6px; justify-content: center;
+    font-size: 0.68rem; font-family: 'Orbitron', monospace; font-weight: 600;
+    letter-spacing: 0.08em; color: #4ade80; margin-top: 14px; padding: 7px 12px;
+    background: rgba(74,222,128,0.07); border: 1px solid rgba(74,222,128,0.18); border-radius: 9px;
+  }
+  .sdot { width:6px; height:6px; border-radius:50%; background:#4ade80; box-shadow:0 0 6px #4ade80; animation: blink 1.5s ease-in-out infinite; }
+
+  /* ── TOAST ── */
+  #toast {
+    position: fixed; bottom: 82px; right: 22px;
+    background: linear-gradient(135deg, rgba(20,3,40,0.97), rgba(8,2,20,0.97));
+    border: 1px solid rgba(168,85,247,0.28); border-radius: 12px;
+    padding: 11px 17px; font-size: 0.82rem; font-weight: 600;
+    color: #c084fc; letter-spacing: 0.04em;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.4), var(--glow-sm);
+    z-index: 600; pointer-events: none;
+    opacity: 0; transform: translateY(10px); transition: all 0.3s ease;
+    backdrop-filter: blur(14px); max-width: 260px;
+  }
+  #toast.show { opacity: 1; transform: translateY(0); }
+
+  /* Scanlines */
+  body::after {
+    content: ''; position: fixed; inset: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.025) 2px, rgba(0,0,0,0.025) 4px);
+    pointer-events: none; z-index: 999;
+  }
+</style>
+</head>
+<body>
+
+<div id="starfield">
+  <div class="star-layer s1"></div>
+  <div class="star-layer s2"></div>
+  <div class="star-layer s3"></div>
+</div>
+
+<div class="nebula n1"></div>
+<div class="nebula n2"></div>
+<div class="nebula n3"></div>
+
+<div id="overlay">
+  <div id="modal">
+    <div class="orb"></div>
+    <h1>Welcome to<br>Void Networks</h1>
+    <p>Your gateway beyond the ordinary web.</p>
+    <div class="tags">
+      <span class="tag">🎮 Games</span>
+      <span class="tag">🔗 Proxies</span>
+      <span class="tag">⚙️ Settings</span>
+      <span class="tag">🚀 &amp; More</span>
+    </div>
+    <button id="enter-btn" onclick="closeWelcome()">⬡ &nbsp;Enter the Void</button>
+  </div>
+</div>
+
+<div id="app">
+  <header>
+    <div class="logo-orb"></div>
+    <h1 class="title">Void Networks</h1>
+  </header>
+  <p class="tagline">Games · Proxies · Settings · Beyond</p>
+
+  <div class="search-wrap">
+    <input type="text" id="proxy-input" placeholder="Search or enter a website to proxy..." autocomplete="off">
+    <button id="launch-btn" onclick="launchProxy()">Launch</button>
+  </div>
+
+  <div class="quick-links">
+    <button class="q-btn" onclick="openCloaked('https://www.youtube.com')">YouTube</button>
+    <button class="q-btn" onclick="openCloaked('https://www.reddit.com')">Reddit</button>
+    <button class="q-btn" onclick="openCloaked('https://discord.com')">Discord</button>
+    <button class="q-btn" onclick="openCloaked('https://github.com')">GitHub</button>
+  </div>
+
+  <div class="divider"></div>
+  <div class="section-lbl">Portal Grid</div>
+
+  <div class="grid">
+    <button class="portal" onclick="handleLaunch('https://1v1.lol')">
+      <div class="dot"></div>
+      <span class="icon">🎯</span>
+      <span class="lbl">1v1.LOL</span>
+    </button>
+    <button class="portal" onclick="handleLaunch('https://slope-game.github.io')">
+      <div class="dot"></div>
+      <span class="icon">🔺</span>
+      <span class="lbl">Slope</span>
+    </button>
+    <button class="portal" onclick="handleLaunch('https://poki.com/en/g/run-3')">
+      <div class="dot"></div>
+      <span class="icon">🏃</span>
+      <span class="lbl">Run 3</span>
+    </button>
+    <button class="portal" onclick="handleLaunch('https://drifthunters.io')">
+      <div class="dot"></div>
+      <span class="icon">🚗</span>
+      <span class="lbl">Drift Hunters</span>
+    </button>
+    <button class="portal" onclick="handleLaunch('https://orteil.dashnet.org/cookieclicker')">
+      <div class="dot"></div>
+      <span class="icon">🍪</span>
+      <span class="lbl">Cookie Clicker</span>
+    </button>
+    <button class="portal" onclick="handleLaunch('https://retrobowl.me')">
+      <div class="dot"></div>
+      <span class="icon">🏈</span>
+      <span class="lbl">Retro Bowl</span>
+    </button>
+    <button class="portal" onclick="handleLaunch('https://shellshock.io')">
+      <div class="dot"></div>
+      <span class="icon">🥚</span>
+      <span class="lbl">Shell Shockers</span>
+    </button>
+    <button class="portal" onclick="handleLaunch('https://paper-io.com')">
+      <div class="dot"></div>
+      <span class="icon">⬛</span>
+      <span class="lbl">Paper.io</span>
+    </button>
+    <button class="portal" onclick="handleLaunch('https://classic.minecraft.net')">
+      <div class="dot"></div>
+      <span class="icon">⛏️</span>
+      <span class="lbl">Minecraft</span>
+    </button>
+    <button class="portal" onclick="handleLaunch('https://krunker.io')">
+      <div class="dot"></div>
+      <span class="icon">🎮</span>
+      <span class="lbl">Krunker.io</span>
+    </button>
+  </div>
+</div>
+
+<div id="settings-wrap">
+  <div id="s-panel">
+    <div class="s-title">⚙ &nbsp;Void Settings</div>
+
+    <div class="s-row">
+      <div class="s-info">
+        <span class="s-name">Auto Close Tabs</span>
+        <span class="s-desc">Won't open when teachers are on. Opens 3 tabs per click securely.</span>
+      </div>
+      <label class="toggle">
+        <input type="checkbox" id="ac-toggle" onchange="updateAutoClose()">
+        <span class="track"></span>
+      </label>
+    </div>
+
+    <div class="s-row">
+      <div class="s-info">
+        <span class="s-name">Tab Cloaking</span>
+        <span class="s-desc">Links open inside about:blank to stay hidden.</span>
+      </div>
+      <label class="toggle">
+        <input type="checkbox" id="cloak-toggle" checked>
+        <span class="track"></span>
+      </label>
+    </div>
+
+    <div class="s-row">
+      <div class="s-info">
+        <span class="s-name">Panic Key (Esc)</span>
+        <span class="s-desc">Press Escape to instantly close all void tabs.</span>
+      </div>
+      <label class="toggle">
+        <input type="checkbox" id="panic-toggle" checked>
+        <span class="track"></span>
+      </label>
+    </div>
+
+    <div class="status">
+      <div class="sdot"></div>
+      VOID SECURE · ONLINE
+    </div>
+  </div>
+  <div id="s-fab" onclick="toggleSettings()">⚙</div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+  let openWins = [];
+
+  // ── WELCOME ──
+  function closeWelcome() {
+    const ov = document.getElementById('overlay');
+    ov.style.transition = 'opacity 0.4s ease';
+    ov.style.opacity = '0';
+    setTimeout(() => ov.remove(), 420);
+  }
+
+  // ── CLOAK ──
+  function openCloaked(url) {
+    const cloak = document.getElementById('cloak-toggle').checked;
+    if (cloak) {
+      const w = window.open('', '_blank');
+      if (w) {
+        w.document.write(`<!DOCTYPE html><html><head><title>New Tab</title><style>*{margin:0;padding:0}html,body{height:100%;overflow:hidden}</style></head><body><iframe src="${url}" style="width:100%;height:100vh;border:none;display:block;"></iframe></body></html>`);
+        w.document.close();
+        openWins.push(w);
+      }
+    } else {
+      const w = window.open(url, '_blank');
+      if (w) openWins.push(w);
+    }
+  }
+
+  // ── HANDLE LAUNCH (single or 3x) ──
+  function handleLaunch(url) {
+    const auto = document.getElementById('ac-toggle').checked;
+    openCloaked(url);
+    if (auto) {
+      openCloaked(url);
+      openCloaked(url);
+      showToast('⬡ 3 tabs opened · Void mode active');
+    }
+  }
+
+  // ── PROXY SEARCH ──
+  function launchProxy() {
+    let v = document.getElementById('proxy-input').value.trim();
+    if (!v) return;
+    if (!v.startsWith('http://') && !v.startsWith('https://')) {
+      v = (v.includes('.') && !v.includes(' ')) ? 'https://' + v : 'https://www.google.com/search?q=' + encodeURIComponent(v);
+    }
+    handleLaunch(v);
+    document.getElementById('proxy-input').value = '';
+  }
+  document.getElementById('proxy-input').addEventListener('keydown', e => { if (e.key === 'Enter') launchProxy(); });
+
+  // ── SETTINGS ──
+  function toggleSettings() {
+    document.getElementById('s-panel').classList.toggle('open');
+  }
+  document.addEventListener('click', e => {
+    if (!document.getElementById('settings-wrap').contains(e.target))
+      document.getElementById('s-panel').classList.remove('open');
+  });
+
+  // ── AUTO CLOSE (page visibility) ──
+  function updateAutoClose() {
+    const on = document.getElementById('ac-toggle').checked;
+    showToast(on ? '⬡ Auto-close ON · 3 tabs per click' : '⬡ Auto-close OFF');
+  }
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden && document.getElementById('ac-toggle').checked) {
+      openWins.forEach(w => { try { w.close(); } catch(e){} });
+      openWins = [];
+    }
+  });
+
+  // ── PANIC KEY ──
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && document.getElementById('panic-toggle').checked) {
+      openWins.forEach(w => { try { w.close(); } catch(e){} });
+      openWins = [];
+      showToast('⚠ Panic triggered · All tabs closed');
+    }
+  });
+
+  // ── TOAST ──
+  let tTimer;
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(tTimer);
+    tTimer = setTimeout(() => t.classList.remove('show'), 2600);
+  }
+</script>
+</body>
+</html><script>console.log('Viewer ready');</script></body></html>
